@@ -1,0 +1,39 @@
+{
+  "name": "code-editor",
+  "version": "1.0.0",
+  "description": "A simple JavaScript/Html/Css editor like codepen or JSbin",
+  "main": "src/js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darco2018/code-editor.git"
+  },
+  "author": "Dariusz Ustrzycki <newsecond@outlook.com> (https://www.javacoder.cloud/)",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "htmlhint": "^0.11.0",
+    "jquery": "3.3.1",
+    "prettier": "1.16.4",
+    "stylelint": "^9.10.1",
+    "stylelint-config-recommended": "^2.1.0",
+    "main.css": "1.0.0",
+    "normalize.css": "8.0.1"
+  },
+  "bugs": {
+    "url": "https://github.com/darco2018/code-editor.git/issues"
+  },
+  "homepage": "https://github.com/darco2018/code-editor.git#readme",
+  "keywords": [
+    "java",
+    "script",
+    "code",
+    "editor",
+    "codepen",
+    "jsbin"
+  ]
+}
