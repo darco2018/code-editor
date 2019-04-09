@@ -120,7 +120,7 @@ main {
   clear: both;
 }
 
-.content {
+.container {
   float: left;
   width: 25%;
   min-width: 200px;
@@ -132,16 +132,24 @@ main {
 }
 
 #css-input {
-  background: lightgreen;
+  background: lightcoral;
 }
 
 #js-input {
   background: lightpink;
 }
 
-#container-output {
-  background: lightgrey;
+#container-result {
+  background: orange;
 }
+#frame-result {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* stylelint-disable no-duplicate-selectors */
 textarea {
   background: yellow;
