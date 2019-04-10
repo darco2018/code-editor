@@ -5,8 +5,10 @@ no-trailing-spaces, max-len, padded-blocks */
 
 $(document).ready(() => {
   // self-executing function/expression
-  const controlPanelDisplayWithButtons = (function main() {
+  const controlPanelVisibiityWithButtons = (() => {
     const $buttons = $(".btn-primary");
+
+    // ------------- functions -------------
 
     const showHidePanel = function () {
       const id = $(this).attr("id");
@@ -32,16 +34,18 @@ $(document).ready(() => {
       $(panelId).toggleClass("hidden");
     };
 
-    $buttons.each(function name() {
+    $buttons.each(function addHandlersOnButtons() {
       $(this).click(showHidePanel);
     });
-  }()); // end main1()
+  })();
 
-  // self-executing function/expression
-  const loadDataToOutputPanel = (function main() {
+  // --- self-executing function/expression
+  const generateWebpageInOutputPanel = (() => {
     const $cssInput = $("#css-input");
     const $htmlInput = $("#html-input");
-    const $myFrameBody = $("#iframe-result")
+    const $jsInput = $("#js-input");
+    const $inputs = $(".input");
+    const $frameBody = $("#iframe-result")
       .contents()
       .find("body");
 
@@ -52,22 +56,30 @@ $(document).ready(() => {
     // ------------- functions -------------
 
     const renderView = () => {
-      $myFrameBody.html($htmlInput.val());
+      $frameBody.html($htmlInput.val());
       $myFrameHead.append(`<style>${$cssInput.val()}</style>`);
+      $frameBody.append(`<script>${$jsInput.val()}</script>`);
     };
 
-    $htmlInput.on("input", () => {
-      renderView();
+    $inputs.each(function addHandlersOnInputPanels() {
+      $(this).on("input", () => {
+        renderView();
+      });
     });
 
-    $cssInput.on("input", () => {
-      renderView();
-    });
+    const renderInitialView = () => {
+      const initilJScript = "document.body.append(document.createTextNode('This text is generated "
+        + "with JavaScript and styled with CSS'))";
+      $jsInput.val(initilJScript);
 
-    /* 
-    $cssInput.on("input", () => {
-      // const middle = "body{background:white}";
-      $myFrameHead.append(start + middle + end);
-    }); */
-  }()); // end main2()
-}); // end ready()
+      const initialHtml = "<h1>Html is simple</h1>";
+      $htmlInput.val(initialHtml);
+
+      const initialCss = "body{font-size: 1.5em;background: yellow;color: blue}";
+      $cssInput.val(initialCss);
+      renderView();
+    };
+
+    renderInitialView();
+  })();
+});
