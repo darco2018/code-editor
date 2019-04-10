@@ -35,5 +35,17 @@ $(document).ready(() => {
     $buttons.each(function name() {
       $(this).click(showHidePanel);
     });
-  }()); // end main()
-});
+  }()); // end main1()
+
+  // self-executing function/expression
+  const loadDataToOutputPanel = (function main() {
+    const $htmlInput = $("#html-input");
+    const $myFrame = $("#iframe-result")
+      .contents()
+      .find("body");
+
+    $htmlInput.on("input", () => {
+      $myFrame.html($htmlInput.val());
+    });
+  }()); // end main2()
+}); // end ready()
