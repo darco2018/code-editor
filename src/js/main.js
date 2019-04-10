@@ -39,13 +39,35 @@ $(document).ready(() => {
 
   // self-executing function/expression
   const loadDataToOutputPanel = (function main() {
+    const $cssInput = $("#css-input");
     const $htmlInput = $("#html-input");
-    const $myFrame = $("#iframe-result")
+    const $myFrameBody = $("#iframe-result")
       .contents()
       .find("body");
 
+    const $myFrameHead = $("#iframe-result")
+      .contents()
+      .find("head");
+
+    // ------------- functions -------------
+
+    const renderView = () => {
+      $myFrameBody.html($htmlInput.val());
+      $myFrameHead.append(`<style>${$cssInput.val()}</style>`);
+    };
+
     $htmlInput.on("input", () => {
-      $myFrame.html($htmlInput.val());
+      renderView();
     });
+
+    $cssInput.on("input", () => {
+      renderView();
+    });
+
+    /* 
+    $cssInput.on("input", () => {
+      // const middle = "body{background:white}";
+      $myFrameHead.append(start + middle + end);
+    }); */
   }()); // end main2()
 }); // end ready()
