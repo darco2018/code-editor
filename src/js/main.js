@@ -4,10 +4,10 @@ no-trailing-spaces, max-len, padded-blocks */
 /* eslint func-names: ["error", "as-needed"] */
 
 $(document).ready(() => {
-  const $buttons = $(".btn-primary");
-
   // self-executing function/expression
-  const feature = (function main() {
+  const controlPanelDisplayWithButtons = (function main() {
+    const $buttons = $(".btn-primary");
+
     const showHidePanel = function () {
       const id = $(this).attr("id");
       let panelId = "#container-";
