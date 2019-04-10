@@ -114,6 +114,14 @@ textarea {
   font-size: 0.9em;
   width: 7em;
   margin: 0;
+  border-radius: 6px;
+}
+.highlight {
+  background: #bbb;
+}
+
+.active {
+  background: rgb(158, 192, 207);
 }
 
 main {
