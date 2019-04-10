@@ -55,9 +55,13 @@ $(document).ready(() => {
 
     // ------------- functions -------------
 
+    $myFrameHead.append("<style id='myStyle'>");
+
     const renderView = () => {
+      console.log("Rendering view");
+
       $frameBody.html($htmlInput.val());
-      $myFrameHead.append(`<style>${$cssInput.val()}</style>`);
+      $myFrameHead.find("#myStyle").html($cssInput.val());
       $frameBody.append(`<script>${$jsInput.val()}</script>`);
     };
 
@@ -80,6 +84,26 @@ $(document).ready(() => {
       renderView();
     };
 
+    console.log("Rendering initial view");
     renderInitialView();
+  })();
+
+  const styleButtons = (() => {
+    const $buttons = $(".btn-primary");
+    $buttons.each(function addActiveBehaviour() {
+      $(this).click(() => {
+        $(this).toggleClass("active");
+        $(this).removeClass("highlight");
+      });
+
+      $(this).hover(
+        () => {
+          $(this).addClass("highlight");
+        },
+        () => {
+          $(this).removeClass("highlight");
+        },
+      );
+    });
   })();
 });
