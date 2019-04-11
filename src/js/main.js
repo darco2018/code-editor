@@ -5,6 +5,43 @@ no-trailing-spaces, max-len, padded-blocks */
 
 $(document).ready(() => {
   // self-executing function/expression
+  const styleButtons = (() => {
+    const $buttons = $(".btn-primary");
+    $buttons.each(function addActiveBehaviour() {
+      $(this).click(() => {
+        $(this).toggleClass("active");
+        $(this).removeClass("highlight");
+      });
+
+      $(this).hover(
+        () => {
+          $(this).addClass("highlight");
+        },
+        () => {
+          $(this).removeClass("highlight");
+        },
+      );
+    });
+  })();
+
+  const stylePanels = (() => {
+    const setPanelHeight = () => {
+      $(".panel").height($(window).height() - $("header").height() - 5);
+    };
+
+    const setPanelWidth = () => {
+      const noOfActivePanels = 4 - $(".hidden").length;
+      $(".panel").width($(window).width() / noOfActivePanels);
+      console.log(`Stop A: ${noOfActivePanels}`);
+    };
+
+    setPanelHeight();
+    setPanelWidth();
+
+    return { setPanelWidth };
+  })();
+
+  // self-executing function/expression
   const controlPanelVisibiityWithButtons = (() => {
     const $buttons = $(".btn-primary");
 
@@ -12,7 +49,7 @@ $(document).ready(() => {
 
     const showHidePanel = function () {
       const id = $(this).attr("id");
-      let panelId = "#container-";
+      let panelId = "#panel-";
 
       switch (id) {
       case "btn-html":
@@ -31,7 +68,8 @@ $(document).ready(() => {
         break;
       }
 
-      $(panelId).toggleClass("hidden");
+      $(panelId).toggleClass("hidden"); // Jquery has toggle() to show/hide
+      stylePanels.setPanelWidth();
     };
 
     $buttons.each(function addHandlersOnButtons() {
@@ -66,6 +104,7 @@ $(document).ready(() => {
     };
 
     $inputs.each(function addHandlersOnInputPanels() {
+      // alternative events: "change keyup paste"
       $(this).on("input", () => {
         renderView();
       });
@@ -86,24 +125,5 @@ $(document).ready(() => {
 
     console.log("Rendering initial view");
     renderInitialView();
-  })();
-
-  const styleButtons = (() => {
-    const $buttons = $(".btn-primary");
-    $buttons.each(function addActiveBehaviour() {
-      $(this).click(() => {
-        $(this).toggleClass("active");
-        $(this).removeClass("highlight");
-      });
-
-      $(this).hover(
-        () => {
-          $(this).addClass("highlight");
-        },
-        () => {
-          $(this).removeClass("highlight");
-        },
-      );
-    });
   })();
 });
