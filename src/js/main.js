@@ -7,9 +7,11 @@ $(document).ready(() => {
   // self-executing function/expression
   const style = (() => {
     const styleButtons = function () {
-      const $buttons = $(".btn-primary");
+      const $buttons = $(".btn");
 
       $buttons.each(function addActiveBehaviour() {
+        $(this).addClass("active");
+
         $(this).click(() => {
           $(this).toggleClass("active");
           $(this).removeClass("highlight");
@@ -17,12 +19,9 @@ $(document).ready(() => {
 
         $(this).hover(
           () => {
-            console.log("Hovering");
-            console.log($(this));
             $(this).addClass("highlight");
           },
           () => {
-            console.log("UnHovering");
             $(this).removeClass("highlight");
           },
         );
@@ -48,32 +47,37 @@ $(document).ready(() => {
 
   // self-executing function/expression
   const controlPanelVisibiityWithButtons = (() => {
-    const $buttons = $(".btn-primary");
+    const $buttons = $(".btn");
 
     // ------------- functions -------------
 
+    const getButtonClass = function (elem) {
+      let btnClass = elem.attr("class");
+      btnClass = btnClass.split(" "); // "btn btn-html active"
+      return btnClass[1]; // btn-html
+    };
+
     const showHidePanel = function () {
-      const id = $(this).attr("id");
       let panelClass = ".panel--";
 
-      switch (id) {
-      case "btn-html":
+      switch (getButtonClass($(this))) {
+      case "btn--html":
         panelClass += "html";
         break;
-      case "btn-css":
+      case "btn--css":
         panelClass += "css";
         break;
-      case "btn-js":
+      case "btn--js":
         panelClass += "js";
         break;
-      case "btn-output":
-        panelClass += "result";
+      case "btn--output":
+        panelClass += "output";
         break;
       default:
         break;
       }
 
-      $(panelClass).toggleClass("hidden"); // Jquery has toggle() to show/hide
+      $(panelClass).toggleClass("hidden"); // Jquery  itselfhas toggle() to show/hide
       style.setPanelWidth();
     };
 
@@ -98,14 +102,14 @@ $(document).ready(() => {
 
     // ------------- functions -------------
 
-    $myFrameHead.append("<style type='text/css' id='myStyle'>");
+    $myFrameHead.append("<style type='text/css'>");
 
     const renderView = () => {
       $("iframe")
         .contents()
         .find("body")
         .html($htmlInput.val());
-      $myFrameHead.find("#myStyle").html($cssInput.val());
+      $myFrameHead.find("<style>").html($cssInput.val());
       $frameBody.append(`<script>${$jsInput.val()}</script>`);
     };
 
@@ -121,7 +125,7 @@ $(document).ready(() => {
         + "with JavaScript and styled with CSS' ));";
       $jsInput.val(initilJScript);
 
-      const initialHtml = "<h1>Html is simple</h1>\n<p>Use the buttons to activate the panels and create your own webpage.</p>";
+      const initialHtml = "<h1>Html is easy</h1>\n<p>Use the buttons to activate the panels and create your own webpage.</p>";
       $htmlInput.val(initialHtml);
 
       const initialCss = "body { \n    font-size: 1.5em; \n    color: blue; \n}";
