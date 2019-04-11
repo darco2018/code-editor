@@ -22,30 +22,34 @@
         your experience and security.
       </p>
     <![endif]-->
-
+    <!-- // [START Header & Primary navigation]  -->
     <header>
-      <h1 id="page-title">CodePlayer</h1>
+      <h1 id="page-title">CodeEditor</h1>
       <nav id="nav-primary">
         <button class="btn-primary active" id="btn-html">HTML</button>
-        <button class="btn-primary" id="btn-css">CSS</button>
-        <button class="btn-primary" id="btn-js">JAVASCRIPT</button>
+        <button class="btn-primary active" id="btn-css">CSS</button>
+        <button class="btn-primary active" id="btn-js">JAVASCRIPT</button>
         <button class="btn-primary active" id="btn-output">OUTPUT</button>
       </nav>
     </header>
-    <main>
-      <div class="panel" id="panel-html">
-        <textarea class="input" id="html-input"></textarea>
-      </div>
-      <div class="panel hidden" id="panel-css">
-        <textarea class="input" id="css-input"></textarea>
-      </div>
-      <div class="panel hidden" id="panel-js">
-        <textarea class="input" id="js-input"></textarea>
-      </div>
-      <div class="panel" id="panel-result">
-        <iframe id="iframe-result"></iframe>
-      </div>
+    <!-- // [END Header and Primary navigation ]-->
+    <!-- // [START content]  -->
+    <main class="clearfix">
+      <textarea class="panel panel--html"></textarea>
+      <textarea class="panel panel--css"></textarea>
+      <textarea class="panel panel--js"></textarea>
+      <iframe class="panel panel--result"></iframe>
     </main>
+
+    <!-- // [END content]  -->
+    <!-- // [START Footer]  -->
+    <footer class="bottom-wrapper">
+      <p>
+        Copyright 2019<br />
+        Design by Dariusz Ustrzycki
+      </p>
+    </footer>
+    <!-- // [END Footer]  -->
 
     <script
       src="https://code.jquery.com/jquery-3.3.1.js"

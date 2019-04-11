@@ -111,75 +111,64 @@ body {
 }
 
 #nav-primary {
-  background: #ccc;
+  width: 99.1%;
+  background: rgb(245, 243, 243);
   text-align: center;
   height: 3em;
   padding-top: 0.8em;
+  margin: 0 0 0.2em 0.1em;
 }
 
-.btn-primary {
+.btn {
   font-size: 0.9em;
   width: 7em;
   padding: 0.2em;
   margin: 0;
   border-radius: 6px;
 }
+
+.active {
+  background: rgb(188, 205, 212);
+}
+
 .highlight {
   background: #bbb;
 }
 
-.active {
-  background: rgb(158, 192, 207);
-}
-
 main {
-  clear: both;
+  margin: auto 0;
+  padding: 0;
 }
 
 .panel {
   float: left;
-  /* width: 50%; */
-  /* min-width: 200px; */
-  padding: 0;
-  margin: 0;
-  /*  height: 660px;
-  min-height: 100%; */
-}
-#html-input {
-  background: lightblue;
+  border: none;
+  padding: 0.4em;
+  margin: 0.1em;
 }
 
-#css-input {
-  background: lightcoral;
+.panel--html,
+.panel--css,
+.panel--js {
+  background: #323232;
+  color: #ddd;
 }
 
-#js-input {
-  background: lightpink;
-}
-
-#panel-result {
-  background: green;
-}
-#iframe-result {
-  border: 0;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background: blue;
-  color: yellow;
+iframe {
+  position: relative;
+  top: -6px;
+  border: none;
+  padding: 0.4em;
 }
 
 /* stylelint-disable no-duplicate-selectors */
 textarea {
-  background: yellow;
-  border: 0;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  /* padding: 0.3em 0.3em; */
   resize: none;
+}
+
+.bottom-wrapper {
+  text-align: center;
+  margin: 0.5em 0;
 }
 
 /* ==========================================================================

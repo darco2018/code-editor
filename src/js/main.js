@@ -5,36 +5,41 @@ no-trailing-spaces, max-len, padded-blocks */
 
 $(document).ready(() => {
   // self-executing function/expression
-  const styleButtons = (() => {
-    const $buttons = $(".btn-primary");
-    $buttons.each(function addActiveBehaviour() {
-      $(this).click(() => {
-        $(this).toggleClass("active");
-        $(this).removeClass("highlight");
-      });
+  const style = (() => {
+    const styleButtons = function () {
+      const $buttons = $(".btn-primary");
 
-      $(this).hover(
-        () => {
-          $(this).addClass("highlight");
-        },
-        () => {
+      $buttons.each(function addActiveBehaviour() {
+        $(this).click(() => {
+          $(this).toggleClass("active");
           $(this).removeClass("highlight");
-        },
-      );
-    });
-  })();
+        });
 
-  const stylePanels = (() => {
+        $(this).hover(
+          () => {
+            console.log("Hovering");
+            console.log($(this));
+            $(this).addClass("highlight");
+          },
+          () => {
+            console.log("UnHovering");
+            $(this).removeClass("highlight");
+          },
+        );
+      });
+    };
+
     const setPanelHeight = () => {
-      $(".panel").height($(window).height() - $("header").height() - 5);
+      $(".panel").height($(window).height() - $("header").height() - 120);
     };
 
     const setPanelWidth = () => {
       const noOfActivePanels = 4 - $(".hidden").length;
-      $(".panel").width($(window).width() / noOfActivePanels);
+      $(".panel").width($(window).width() / noOfActivePanels - 16);
       console.log(`Stop A: ${noOfActivePanels}`);
     };
 
+    styleButtons();
     setPanelHeight();
     setPanelWidth();
 
@@ -49,27 +54,27 @@ $(document).ready(() => {
 
     const showHidePanel = function () {
       const id = $(this).attr("id");
-      let panelId = "#panel-";
+      let panelClass = ".panel--";
 
       switch (id) {
       case "btn-html":
-        panelId += "html";
+        panelClass += "html";
         break;
       case "btn-css":
-        panelId += "css";
+        panelClass += "css";
         break;
       case "btn-js":
-        panelId += "js";
+        panelClass += "js";
         break;
       case "btn-output":
-        panelId += "result";
+        panelClass += "result";
         break;
       default:
         break;
       }
 
-      $(panelId).toggleClass("hidden"); // Jquery has toggle() to show/hide
-      stylePanels.setPanelWidth();
+      $(panelClass).toggleClass("hidden"); // Jquery has toggle() to show/hide
+      style.setPanelWidth();
     };
 
     $buttons.each(function addHandlersOnButtons() {
@@ -79,26 +84,27 @@ $(document).ready(() => {
 
   // --- self-executing function/expression
   const generateWebpageInOutputPanel = (() => {
-    const $cssInput = $("#css-input");
-    const $htmlInput = $("#html-input");
-    const $jsInput = $("#js-input");
-    const $inputs = $(".input");
-    const $frameBody = $("#iframe-result")
+    const $cssInput = $(".panel--css");
+    const $htmlInput = $(".panel--html");
+    const $jsInput = $(".panel--js");
+    const $inputs = $(".panel");
+    const $frameBody = $("iframe")
       .contents()
       .find("body");
 
-    const $myFrameHead = $("#iframe-result")
+    const $myFrameHead = $("iframe")
       .contents()
       .find("head");
 
     // ------------- functions -------------
 
-    $myFrameHead.append("<style id='myStyle'>");
+    $myFrameHead.append("<style type='text/css' id='myStyle'>");
 
     const renderView = () => {
-      console.log("Rendering view");
-
-      $frameBody.html($htmlInput.val());
+      $("iframe")
+        .contents()
+        .find("body")
+        .html($htmlInput.val());
       $myFrameHead.find("#myStyle").html($cssInput.val());
       $frameBody.append(`<script>${$jsInput.val()}</script>`);
     };
@@ -111,19 +117,18 @@ $(document).ready(() => {
     });
 
     const renderInitialView = () => {
-      const initilJScript = "document.body.append(document.createTextNode('This text is generated "
-        + "with JavaScript and styled with CSS'))";
+      const initilJScript = "document.body.append( document.createTextNode( 'This text is generated "
+        + "with JavaScript and styled with CSS' ));";
       $jsInput.val(initilJScript);
 
-      const initialHtml = "<h1>Html is simple</h1>";
+      const initialHtml = "<h1>Html is simple</h1>\n<p>Use the buttons to activate the panels and create your own webpage.</p>";
       $htmlInput.val(initialHtml);
 
-      const initialCss = "body{font-size: 1.5em;background: yellow;color: blue}";
+      const initialCss = "body { \n    font-size: 1.5em; \n    color: blue; \n}";
       $cssInput.val(initialCss);
       renderView();
     };
 
-    console.log("Rendering initial view");
     renderInitialView();
   })();
 });
