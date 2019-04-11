@@ -41,7 +41,11 @@
       <textarea class="panel panel--html"></textarea>
       <textarea class="panel panel--css"></textarea>
       <textarea class="panel panel--js"></textarea>
-      <iframe class="panel panel--output"></iframe>
+      <iframe
+        class="panel panel--output"
+        sandbox="allow-modals allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts"
+        allow="geolocation; midi; camera; microphone; speaker;"
+      ></iframe>
     </main>
 
     <!-- // [END content]  -->
