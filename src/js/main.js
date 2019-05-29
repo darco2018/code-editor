@@ -1,5 +1,9 @@
-/* eslint-disable no-alert, no-console, no-unused-vars, no-multiple-empty-lines, 
-no-trailing-spaces, max-len, padded-blocks */
+/**
+ * /* eslint-disable no-alert, no-console, no-unused-vars, no-multiple-empty-lines,
+ * no-trailing-spaces, max-len, padded-blocks
+ *
+ * @format
+ */
 
 /* eslint func-names: ["error", "as-needed"] */
 
@@ -92,25 +96,28 @@ $(document).ready(() => {
     const $htmlInput = $(".panel--html");
     const $jsInput = $(".panel--js");
     const $inputs = $(".panel");
-    const $frameBody = $("iframe")
-      .contents()
-      .find("body");
-
-    const $myFrameHead = $("iframe")
-      .contents()
-      .find("head");
 
     // ------------- functions -------------
-
-    $myFrameHead.append("<style type='text/css'>");
 
     const renderView = () => {
       $("iframe")
         .contents()
+        .find("head")
+        .html(`<style type='text/css'>${$cssInput.val()}</style>`);
+
+      $("iframe")
+        .contents()
         .find("body")
         .html($htmlInput.val());
-      $myFrameHead.find("<style>").html($cssInput.val());
-      $frameBody.append(`<script>${$jsInput.val()}</script>`);
+
+      /*  $("iframe")
+        .get(0) // get JS obj
+        .contentWindow.eval($jsInput.val()); */
+
+      $("iframe")
+        .contents()
+        .find("body")
+        .append(`<script>${$jsInput.val()}</script>`);
     };
 
     $inputs.each(function addHandlersOnInputPanels() {
@@ -121,14 +128,13 @@ $(document).ready(() => {
     });
 
     const renderInitialView = () => {
-      const initilJScript = "document.body.append( document.createTextNode( 'This text is generated "
-        + "with JavaScript and styled with CSS' ));";
+      const initilJScript =        "var msg = document.getElementById('message'); \nmsg.style = 'font-weight: bold; text-decoration: underline'";
       $jsInput.val(initilJScript);
 
-      const initialHtml = "<h1>Html is easy</h1>\n<p>Use the buttons to activate the panels and create your own webpage.</p>";
+      const initialHtml =        "<h1>Html is easy</h1>\n<p>Use the buttons to activate the panels and create <span id='message'>your own</span> webpage.</p>";
       $htmlInput.val(initialHtml);
 
-      const initialCss = "body { \n    font-size: 1.5em; \n    color: blue; \n}";
+      const initialCss =        "h1 { \n    color: blue; \n} p {\n    font-size: 1.5em; \n    color: green; \n}";
       $cssInput.val(initialCss);
       renderView();
     };
