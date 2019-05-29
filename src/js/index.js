@@ -1,6 +1,4 @@
 /**
- * /* eslint-disable no-alert, no-console, no-unused-vars, no-multiple-empty-lines,
- * no-trailing-spaces, max-len, padded-blocks
  *
  * @format
  */
@@ -10,7 +8,7 @@
 $(document).ready(() => {
   // self-executing function/expression
   const style = (() => {
-    const styleButtons = function () {
+    const styleButtons = function() {
       const $buttons = $(".btn");
 
       $buttons.each(function addActiveBehaviour() {
@@ -27,7 +25,7 @@ $(document).ready(() => {
           },
           () => {
             $(this).removeClass("highlight");
-          },
+          }
         );
       });
     };
@@ -55,30 +53,30 @@ $(document).ready(() => {
 
     // ------------- functions -------------
 
-    const getButtonClass = function (elem) {
+    const getButtonClass = function(elem) {
       let btnClass = elem.attr("class");
       btnClass = btnClass.split(" "); // "btn btn-html active"
       return btnClass[1]; // btn-html
     };
 
-    const showHidePanel = function () {
+    const showHidePanel = function() {
       let panelClass = ".panel--";
 
       switch (getButtonClass($(this))) {
-      case "btn--html":
-        panelClass += "html";
-        break;
-      case "btn--css":
-        panelClass += "css";
-        break;
-      case "btn--js":
-        panelClass += "js";
-        break;
-      case "btn--output":
-        panelClass += "output";
-        break;
-      default:
-        break;
+        case "btn--html":
+          panelClass += "html";
+          break;
+        case "btn--css":
+          panelClass += "css";
+          break;
+        case "btn--js":
+          panelClass += "js";
+          break;
+        case "btn--output":
+          panelClass += "output";
+          break;
+        default:
+          break;
       }
 
       $(panelClass).toggleClass("hidden"); // Jquery  itselfhas toggle() to show/hide
@@ -128,13 +126,16 @@ $(document).ready(() => {
     });
 
     const renderInitialView = () => {
-      const initilJScript =        "var msg = document.getElementById('message'); \nmsg.style = 'font-weight: bold; text-decoration: underline'";
+      const initilJScript =
+        "var msg = document.getElementById('message'); \nmsg.style = 'font-weight: bold; text-decoration: underline'";
       $jsInput.val(initilJScript);
 
-      const initialHtml =        "<h1>Html is easy</h1>\n<p>Use the buttons to activate the panels and create <span id='message'>your own</span> webpage.</p>";
+      const initialHtml =
+        "<h1>Html is easy</h1>\n<p>Use the buttons to activate the panels and create <span id='message'>your own</span> webpage.</p>";
       $htmlInput.val(initialHtml);
 
-      const initialCss =        "h1 { \n    color: blue; \n} p {\n    font-size: 1.5em; \n    color: green; \n}";
+      const initialCss =
+        "h1 { \n    color: blue; \n} p {\n    font-size: 1.5em; \n    color: green; \n}";
       $cssInput.val(initialCss);
       renderView();
     };
