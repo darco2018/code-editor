@@ -4,6 +4,7 @@
  */
 
 /* eslint func-names: ["error", "as-needed"] */
+import "../css/main.scss";
 
 $(document).ready(() => {
   // self-executing function/expression

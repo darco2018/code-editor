@@ -1,0 +1,72 @@
+body {
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+#page-title {
+  float: left;
+  margin: 0;
+  padding: 0.2em 0.2em;
+}
+
+#nav-primary {
+  width: 99.1%;
+  background: rgb(245, 243, 243);
+  text-align: center;
+  height: 3em;
+  padding-top: 0.8em;
+  margin: 0 0 0.2em 0.1em;
+}
+
+.btn {
+  font-size: 0.9em;
+  width: 7em;
+  padding: 0.2em;
+  margin: 0;
+  border-radius: 6px;
+}
+
+.active {
+  background: rgb(188, 205, 212);
+}
+
+.highlight {
+  background: #bbb;
+}
+
+main {
+  margin: auto 0;
+  padding: 0;
+}
+
+.panel {
+  float: left;
+  border: none;
+  padding: 0.4em;
+  margin: 0.1em;
+}
+
+.panel--html,
+.panel--css,
+.panel--js {
+  background: #323232;
+  color: #ddd;
+}
+
+iframe {
+  position: relative;
+  top: -6px;
+  border: none;
+  padding: 0.4em;
+}
+
+/* stylelint-disable no-duplicate-selectors */
+textarea {
+  resize: none;
+}
+
+.bottom-wrapper {
+  text-align: center;
+  margin: 0.5em 0;
+}
