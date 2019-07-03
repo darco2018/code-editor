@@ -7,11 +7,10 @@
 import "../css/main.scss";
 
 $(document).ready(() => {
+  const $buttons = $(".btn");
   // self-executing function/expression
   const style = (() => {
     const styleButtons = function() {
-      const $buttons = $(".btn");
-
       $buttons.each(function addActiveBehaviour() {
         $(this).addClass("active");
 
@@ -32,69 +31,70 @@ $(document).ready(() => {
     };
 
     const setPanelHeight = () => {
-      $(".panel").height($(window).height() - $("header").height() - 120);
+      const footerHeight = 120;
+      $(".panel").height(
+        $(window).height() - $("header").height() - footerHeight
+      );
     };
 
-    const setPanelWidth = () => {
+    const setAllPanelsWidth = () => {
       const noOfActivePanels = 4 - $(".hidden").length;
-      $(".panel").width($(window).width() / noOfActivePanels - 16);
+      const margin = 16;
+      $(".panel").width($(window).width() / noOfActivePanels - margin);
       console.log(`Stop A: ${noOfActivePanels}`);
     };
 
     styleButtons();
     setPanelHeight();
-    setPanelWidth();
+    setAllPanelsWidth();
 
-    return { setPanelWidth };
+    return { setAllPanelsWidth };
   })();
 
   // self-executing function/expression
   const controlPanelVisibiityWithButtons = (() => {
-    const $buttons = $(".btn");
-
     // ------------- functions -------------
-
     const getButtonClass = function(elem) {
       let btnClass = elem.attr("class");
       btnClass = btnClass.split(" "); // "btn btn-html active"
       return btnClass[1]; // btn-html
     };
 
-    const showHidePanel = function() {
-      let panelClass = ".panel--";
+    const mapBtnClassToPanelClass = function() {
+      let panelToHide = ".panel--";
 
       switch (getButtonClass($(this))) {
         case "btn--html":
-          panelClass += "html";
+          panelToHide += "html";
           break;
         case "btn--css":
-          panelClass += "css";
+          panelToHide += "css";
           break;
         case "btn--js":
-          panelClass += "js";
+          panelToHide += "js";
           break;
         case "btn--output":
-          panelClass += "output";
+          panelToHide += "output";
           break;
         default:
           break;
       }
 
-      $(panelClass).toggleClass("hidden"); // Jquery  itselfhas toggle() to show/hide
-      style.setPanelWidth();
+      $(panelToHide).toggleClass("hidden");
+      style.setAllPanelsWidth();
     };
 
     $buttons.each(function addHandlersOnButtons() {
-      $(this).click(showHidePanel);
+      $(this).click(mapBtnClassToPanelClass);
     });
   })();
 
   // --- self-executing function/expression
   const generateWebpageInOutputPanel = (() => {
+    const $inputs = $(".panel");
     const $cssInput = $(".panel--css");
     const $htmlInput = $(".panel--html");
     const $jsInput = $(".panel--js");
-    const $inputs = $(".panel");
 
     // ------------- functions -------------
 
@@ -109,10 +109,6 @@ $(document).ready(() => {
         .find("body")
         .html($htmlInput.val());
 
-      /*  $("iframe")
-        .get(0) // get JS obj
-        .contentWindow.eval($jsInput.val()); */
-
       $("iframe")
         .contents()
         .find("body")
@@ -120,7 +116,6 @@ $(document).ready(() => {
     };
 
     $inputs.each(function addHandlersOnInputPanels() {
-      // alternative events: "change keyup paste"
       $(this).on("input", () => {
         renderView();
       });
